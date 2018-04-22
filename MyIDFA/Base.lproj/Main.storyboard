@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LGL-Q8-5HJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="hPd-Qb-Orw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is your IDFA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYi-ob-cIh">
+                                <rect key="frame" x="15" y="40" width="340" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="CF4-8b-Oa5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNL-K4-zu4">
+                                <rect key="frame" x="0.0" y="110" width="375" height="193.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Kft-uS-Kgn">
+                                        <rect key="frame" x="5" y="67" width="365" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="jfh-nr-bQF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Kft-uS-Kgn" firstAttribute="centerY" secondItem="qNL-K4-zu4" secondAttribute="centerY" id="51S-SW-QNN"/>
+                                    <constraint firstItem="Kft-uS-Kgn" firstAttribute="width" secondItem="qNL-K4-zu4" secondAttribute="width" constant="-10" id="TNP-Pf-CrY"/>
+                                    <constraint firstItem="Kft-uS-Kgn" firstAttribute="centerX" secondItem="qNL-K4-zu4" secondAttribute="centerX" id="yjK-Bx-iKc"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fx-pP-2Ls">
+                                <rect key="frame" x="40" y="303.5" width="295" height="60"/>
+                                <color key="backgroundColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="bSG-R5-Kdd"/>
+                                </constraints>
+                                <state key="normal" title="Copy to clipboard"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="actionCopy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sy5-xy-Ln1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ja7-bh-cjG">
+                                <rect key="frame" x="319" y="13" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="23H-Xe-9Lp"/>
+                                    <constraint firstAttribute="width" constant="40" id="URx-re-0Us"/>
+                                </constraints>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpR-cb-aMv" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="f7G-Ng-hEV"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-ze-Gdr">
+                                <rect key="frame" x="329" y="30" width="36" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="OGS-KE-neV"/>
+                                </constraints>
+                                <state key="normal" title="More">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionMore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpa-Oe-GTa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ja7-bh-cjG" secondAttribute="trailing" constant="16" id="0VS-IJ-6n3"/>
+                            <constraint firstItem="qNL-K4-zu4" firstAttribute="top" secondItem="QYi-ob-cIh" secondAttribute="bottom" id="2mQ-bm-wzi"/>
+                            <constraint firstItem="9Fx-pP-2Ls" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-80" id="3UR-dC-AEu"/>
+                            <constraint firstItem="9Fx-pP-2Ls" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B1C-QG-1BB"/>
+                            <constraint firstItem="hPd-Qb-Orw" firstAttribute="top" secondItem="lpR-cb-aMv" secondAttribute="bottom" id="BDb-55-jJ0"/>
+                            <constraint firstAttribute="trailing" secondItem="QYi-ob-cIh" secondAttribute="trailing" constant="20" symbolic="YES" id="DUW-0u-usn"/>
+                            <constraint firstAttribute="trailing" secondItem="Qpn-ze-Gdr" secondAttribute="trailing" constant="10" id="Kak-qP-t8z"/>
+                            <constraint firstItem="Qpn-ze-Gdr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="QCc-dc-Mmw"/>
+                            <constraint firstItem="ja7-bh-cjG" firstAttribute="top" secondItem="LGL-Q8-5HJ" secondAttribute="bottom" constant="-7" id="U5X-MG-vbS"/>
+                            <constraint firstItem="QYi-ob-cIh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="40" id="VGp-Vl-ia0"/>
+                            <constraint firstItem="9Fx-pP-2Ls" firstAttribute="top" secondItem="qNL-K4-zu4" secondAttribute="bottom" id="apW-v6-EhQ"/>
+                            <constraint firstItem="qNL-K4-zu4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fua-ah-GW7"/>
+                            <constraint firstItem="lpR-cb-aMv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hit-X9-15Z"/>
+                            <constraint firstItem="QYi-ob-cIh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="jhx-0n-g9q"/>
+                            <constraint firstItem="qNL-K4-zu4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="phJ-12-Wr3"/>
+                            <constraint firstItem="Qpn-ze-Gdr" firstAttribute="top" secondItem="LGL-Q8-5HJ" secondAttribute="bottom" constant="10" id="qbk-1c-e2z"/>
+                            <constraint firstItem="lpR-cb-aMv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t9y-v3-KFs"/>
+                            <constraint firstItem="9Fx-pP-2Ls" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="x2D-M6-SWH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="banner" destination="lpR-cb-aMv" id="F7s-GI-HM3"/>
+                        <outlet property="btnMoreTop" destination="qbk-1c-e2z" id="D0G-a1-3hG"/>
+                        <outlet property="idfaLabel" destination="Kft-uS-Kgn" id="rIZ-7d-CQu"/>
+                        <outlet property="idfaLabelTop" destination="VGp-Vl-ia0" id="Apk-VW-R84"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
