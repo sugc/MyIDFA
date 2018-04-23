@@ -7,7 +7,9 @@
 //
 
 #import "InfoViewController.h"
-
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+#import "MacAddressManager.h"
 
 @interface InfoViewController()<UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addGesture];
+    [self getAllInfo];
 }
 
 - (void)addGesture {
@@ -48,6 +51,10 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 80;
+}
 
 - (IBAction)actionBack:(id)sender {
     [self backWithDreiction:UISwipeGestureRecognizerDirectionRight];
@@ -61,7 +68,6 @@
     }
     
     NSString *subType = direction == UISwipeGestureRecognizerDirectionRight ? kCATransitionFromLeft : kCATransitionFromRight;
-    
     CATransition *animation = [CATransition animation];
     animation.duration = 0.6;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -70,5 +76,37 @@
     [self.view.window.layer addAnimation:animation forKey:nil];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
+//获取所有信息
+- (void)getAllInfo {
+    NSString *ipv4 = [self getIPAddress];
+    NSString *macAddr = [MacAddressManager getMacAddressFromMDNS];
+    
+    NSLog(@"ip is...");
+}
+
+- (NSString *)getIPAddress {
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    success = getifaddrs(&interfaces);
+    
+    if (success == 0) {
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            if (temp_addr->ifa_addr->sa_family == AF_INET) {
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // 得到NSString从C字符串
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    freeifaddrs(interfaces);
+    return address;
+}
+
 
 @end

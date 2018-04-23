@@ -50,11 +50,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsT-Qi-pGq">
-                                                    <rect key="frame" x="30" y="30.5" width="42" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="KcY-BK-SA7"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsT-Qi-pGq">
+                                                    <rect key="frame" x="30" y="32" width="42" height="59"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -68,11 +65,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="dsT-Qi-pGq" firstAttribute="top" secondItem="he6-JU-nfL" secondAttribute="bottom" id="2Ji-8V-Phh"/>
                                                 <constraint firstItem="g1I-0k-7nR" firstAttribute="centerY" secondItem="GwN-kD-9wv" secondAttribute="centerY" id="3kN-c2-3Kp"/>
-                                                <constraint firstItem="dsT-Qi-pGq" firstAttribute="centerY" secondItem="GwN-kD-9wv" secondAttribute="centerY" id="8GR-De-HLh"/>
                                                 <constraint firstItem="he6-JU-nfL" firstAttribute="top" secondItem="GwN-kD-9wv" secondAttribute="top" constant="11" id="CvA-cg-k7L"/>
                                                 <constraint firstItem="he6-JU-nfL" firstAttribute="leading" secondItem="GwN-kD-9wv" secondAttribute="leading" constant="23" id="RqX-uw-ebU"/>
                                                 <constraint firstAttribute="trailing" secondItem="g1I-0k-7nR" secondAttribute="trailing" constant="15" id="c2J-Fq-9A8"/>
+                                                <constraint firstAttribute="bottom" secondItem="dsT-Qi-pGq" secondAttribute="bottom" id="du8-Xg-0aJ"/>
                                                 <constraint firstItem="dsT-Qi-pGq" firstAttribute="leading" secondItem="GwN-kD-9wv" secondAttribute="leading" constant="30" id="eX5-Ok-gye"/>
                                             </constraints>
                                         </tableViewCellContentView>

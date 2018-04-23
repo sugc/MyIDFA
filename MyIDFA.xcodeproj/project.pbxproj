@@ -16,6 +16,7 @@
 		8AA001EE202B1CC8002BE56E /* MyIDFATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA001ED202B1CC8002BE56E /* MyIDFATests.m */; };
 		8AA001F9202B1CC8002BE56E /* MyIDFAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA001F8202B1CC8002BE56E /* MyIDFAUITests.m */; };
 		8AA00208202B1D63002BE56E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA00207202B1D63002BE56E /* AdSupport.framework */; };
+		8AC424A1208E05CE00760161 /* MacAddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC424A0208E05CE00760161 /* MacAddressManager.m */; };
 		8AFC9A3D208C74F4006000A5 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC9A3C208C74F4006000A5 /* InfoViewController.m */; };
 		8AFC9A3F208C757C006000A5 /* InfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AFC9A3E208C757C006000A5 /* InfoViewController.storyboard */; };
 		8AFC9A42208C7827006000A5 /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC9A41208C7827006000A5 /* InfoTableViewCell.m */; };
@@ -59,6 +60,8 @@
 		8AA001F8202B1CC8002BE56E /* MyIDFAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyIDFAUITests.m; sourceTree = "<group>"; };
 		8AA001FA202B1CC8002BE56E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AA00207202B1D63002BE56E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		8AC4249F208E05CD00760161 /* MacAddressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacAddressManager.h; sourceTree = "<group>"; };
+		8AC424A0208E05CE00760161 /* MacAddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacAddressManager.m; sourceTree = "<group>"; };
 		8AFC9A3B208C74E7006000A5 /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		8AFC9A3C208C74F4006000A5 /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		8AFC9A3E208C757C006000A5 /* InfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InfoViewController.storyboard; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 				8AFC9A3E208C757C006000A5 /* InfoViewController.storyboard */,
 				8AFC9A40208C781C006000A5 /* InfoTableViewCell.h */,
 				8AFC9A41208C7827006000A5 /* InfoTableViewCell.m */,
+				8AC4249F208E05CD00760161 /* MacAddressManager.h */,
+				8AC424A0208E05CE00760161 /* MacAddressManager.m */,
 			);
 			path = MyIDFA;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			files = (
 				8AA001D9202B1CC8002BE56E /* ViewController.m in Sources */,
 				8AA001E4202B1CC8002BE56E /* main.m in Sources */,
+				8AC424A1208E05CE00760161 /* MacAddressManager.m in Sources */,
 				8AFC9A3D208C74F4006000A5 /* InfoViewController.m in Sources */,
 				8AA001D6202B1CC8002BE56E /* AppDelegate.m in Sources */,
 				8AFC9A42208C7827006000A5 /* InfoTableViewCell.m in Sources */,
@@ -548,6 +554,72 @@
 				INFOPLIST_FILE = MyIDFA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"GoogleToolboxForMac\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseNanoPB\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMobileAds\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"JavaScriptCore\"",
+					"-weak_framework",
+					"\"SafariServices\"",
+					"-weak_framework",
+					"\"WebKit\"",
+					"-lresolv",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.magic.sugc.MyIDFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -564,6 +636,72 @@
 				INFOPLIST_FILE = MyIDFA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"GoogleToolboxForMac\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseNanoPB\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMobileAds\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"JavaScriptCore\"",
+					"-weak_framework",
+					"\"SafariServices\"",
+					"-weak_framework",
+					"\"WebKit\"",
+					"-lresolv",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.magic.sugc.MyIDFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
