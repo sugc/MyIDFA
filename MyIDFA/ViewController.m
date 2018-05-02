@@ -10,6 +10,7 @@
 #import "InfoViewController.h"
 #import <AdSupport/AdSupport.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
+#import "AppDelegate.h"
 
 #define IS_IPHONE_5_8 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )812 ) < DBL_EPSILON )
 
@@ -18,7 +19,7 @@
 #define iPhoneXSafeDistance ((IS_IPHONE_5_8)?78:0)
 
 
-@interface ViewController ()<GADBannerViewDelegate>
+@interface ViewController ()<GADBannerViewDelegate,GADInterstitialDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *idfaLabelTop;
 
@@ -38,13 +39,29 @@
     NSString *idfa = [self getIDFA];
     _idfaLabel.text = idfa;
     [self checkIsIDFAUseful:idfa];
-    
+    [self addGesture];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showFullScreenAd) name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
     _banner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
     GADRequest *request = [GADRequest request];
     [_banner loadRequest:request];
     _banner.rootViewController = self;
     _banner.delegate = self;
-    [self addGesture];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        UIView *foreView = [[UIView alloc] initWithFrame:self.view.bounds];
+        foreView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:foreView];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self showFullScreenAd];
+            [foreView removeFromSuperview];
+        });
+    });
+    
 }
 
 - (void)addGesture {
@@ -52,10 +69,10 @@
     rRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     UISwipeGestureRecognizer *lRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     lRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    
     [self.view addGestureRecognizer:rRecognizer];
     [self.view addGestureRecognizer:lRecognizer];
 }
+
 
 - (void)swipe:(UISwipeGestureRecognizer *)recognizer {
     
@@ -127,6 +144,21 @@
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
     [bannerView removeFromSuperview];
+}
+
+- (void)showFullScreenAd {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (delegate.interstitial.isReady) {
+        [CATransaction setDisableActions:YES];
+        self.modalPresentationStyle = UIModalPresentationNone;
+        [delegate.interstitial presentFromRootViewController:self];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[self presentedViewController] dismissViewControllerAnimated:NO completion:^{
+                
+            }];
+        });
+    }
 }
 
 @end
