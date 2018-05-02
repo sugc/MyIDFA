@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -74,19 +74,12 @@
                                     <constraint firstAttribute="width" constant="40" id="URx-re-0Us"/>
                                 </constraints>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpR-cb-aMv" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="f7G-Ng-hEV"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-ze-Gdr">
-                                <rect key="frame" x="329" y="30" width="36" height="35"/>
+                                <rect key="frame" x="307" y="30" width="58" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="OGS-KE-neV"/>
                                 </constraints>
-                                <state key="normal" title="More">
+                                <state key="normal" title="Network">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -100,7 +93,6 @@
                             <constraint firstItem="qNL-K4-zu4" firstAttribute="top" secondItem="QYi-ob-cIh" secondAttribute="bottom" id="2mQ-bm-wzi"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-80" id="3UR-dC-AEu"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B1C-QG-1BB"/>
-                            <constraint firstItem="hPd-Qb-Orw" firstAttribute="top" secondItem="lpR-cb-aMv" secondAttribute="bottom" id="BDb-55-jJ0"/>
                             <constraint firstAttribute="trailing" secondItem="QYi-ob-cIh" secondAttribute="trailing" constant="20" symbolic="YES" id="DUW-0u-usn"/>
                             <constraint firstAttribute="trailing" secondItem="Qpn-ze-Gdr" secondAttribute="trailing" constant="10" id="Kak-qP-t8z"/>
                             <constraint firstItem="Qpn-ze-Gdr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="QCc-dc-Mmw"/>
@@ -108,16 +100,13 @@
                             <constraint firstItem="QYi-ob-cIh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="40" id="VGp-Vl-ia0"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="top" secondItem="qNL-K4-zu4" secondAttribute="bottom" id="apW-v6-EhQ"/>
                             <constraint firstItem="qNL-K4-zu4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fua-ah-GW7"/>
-                            <constraint firstItem="lpR-cb-aMv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hit-X9-15Z"/>
                             <constraint firstItem="QYi-ob-cIh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="jhx-0n-g9q"/>
                             <constraint firstItem="qNL-K4-zu4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="phJ-12-Wr3"/>
                             <constraint firstItem="Qpn-ze-Gdr" firstAttribute="top" secondItem="LGL-Q8-5HJ" secondAttribute="bottom" constant="10" id="qbk-1c-e2z"/>
-                            <constraint firstItem="lpR-cb-aMv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t9y-v3-KFs"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="x2D-M6-SWH"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="banner" destination="lpR-cb-aMv" id="F7s-GI-HM3"/>
                         <outlet property="btnMoreTop" destination="qbk-1c-e2z" id="D0G-a1-3hG"/>
                         <outlet property="idfaLabel" destination="Kft-uS-Kgn" id="rIZ-7d-CQu"/>
                         <outlet property="idfaLabelTop" destination="VGp-Vl-ia0" id="Apk-VW-R84"/>

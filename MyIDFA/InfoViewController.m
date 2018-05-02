@@ -23,8 +23,12 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, copy) NSString *ipv4;
-@property (nonatomic, copy) NSString *ipv6;
+@property (nonatomic, copy) NSString *deviceIpv4;
+
+@property (nonatomic, copy) NSString *deviceIpv6;
+
+@property (nonatomic, copy) NSString *celluarIpv4;
+
 @property (nonatomic, copy) NSString *macAddr;
 
 @end
@@ -65,31 +69,37 @@
     
     switch (indexPath.row) {
         case 0:
-            title = @"ipv4 address";
-            if (![_ipv4 isEqualToString:@"0.0.0.0"]) {
-                subTitle = _ipv4;
+            title = @"Device IP";
+            if (_deviceIpv4) {
+                subTitle = _deviceIpv4;
             }else {
-                subTitle = @"please enable your network to get ipv4 address";
+                subTitle = @"NO IP";
             }
             break;
         case 1:
-            title = @"ipv6 addreess";
-            if (![_ipv6 isEqualToString:@"0.0.0.0"]) {
-                subTitle = _ipv6;
+            title = @"Device IP(V6)";
+            if (_deviceIpv6) {
+                subTitle = _deviceIpv6;
             }else {
-                subTitle = @"please enable your network to get ipv6 address";
+                subTitle = @"NO IP";
             }
             break;
         case 2:
+            title = @"Celluar IP";
+            if (_celluarIpv4) {
+                subTitle = _celluarIpv4;
+            }else {
+                subTitle = @"NO IP";
+            }
+            break;
+        case 3:
+            
             title = @"mac addreess";
             if (_macAddr) {
                 subTitle = _macAddr;
             }else {
                 subTitle = @"please enable your wifi to get mac address";
             }
-            break;
-        case 3:
-            
             break;
         default:
             break;
@@ -101,7 +111,7 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -146,25 +156,38 @@
 
 //获取所有信息
 - (void)getAllInfo {
-    _ipv4 = [self getIPAddress:YES];
-    _ipv6 = [self getIPAddress:NO];
+    [self getIPAddress:YES];
+    
     _macAddr = [MacAddressManager getMacAddressFromMDNS];
 }
 
-- (NSString *)getIPAddress:(BOOL)preferIPv4 {
+- (void)getIPAddress:(BOOL)preferIPv4 {
     
     NSArray *searchArray = preferIPv4 ?
   @[ IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6] :
     @[ /*IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4,*/ IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ] ;
+    
     NSDictionary *addresses = [self getIPAddresses];
-    NSLog(@"addresses: %@", addresses);
-    __block NSString *address;
     [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop)
      {
-         address = addresses[key];
-         if(address) *stop = YES;
-     } ];
-    return address ? address : @"0.0.0.0";
+
+         NSString *ip = addresses[key];
+         if ([key hasSuffix:IP_ADDR_IPv4]) {
+             if (ip) {
+                 _deviceIpv4 = ip;
+             }
+         }else if ([key hasSuffix:IP_ADDR_IPv6]) {
+             if (ip) {
+                 _deviceIpv6 = ip;
+             }
+         }
+         
+         if ([key hasPrefix:IOS_CELLULAR]) {
+             if (ip) {
+                 _celluarIpv4 = ip;
+             }
+         }
+     }];
 }
 
 - (NSDictionary *)getIPAddresses

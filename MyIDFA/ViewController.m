@@ -27,7 +27,11 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *idfaLabel;
 
-@property (nonatomic, weak) IBOutlet GADBannerView *banner;
+@property (nonatomic, assign) BOOL forbidenAd;
+
+@property (nonatomic, strong) GADBannerView *banner;
+
+@property (nonatomic, strong) GADBannerView *requestBanner;
 
 @end
 
@@ -40,17 +44,11 @@
     _idfaLabel.text = idfa;
     [self checkIsIDFAUseful:idfa];
     [self addGesture];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showFullScreenAd) name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    _banner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
-    GADRequest *request = [GADRequest request];
-    [_banner loadRequest:request];
-    _banner.rootViewController = self;
-    _banner.delegate = self;
+    [self showAdBanner];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         UIView *foreView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -59,9 +57,14 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self showFullScreenAd];
             [foreView removeFromSuperview];
+            //
         });
     });
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self showAdBanner];
 }
 
 - (void)addGesture {
@@ -142,10 +145,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
-    [bannerView removeFromSuperview];
-}
-
 - (void)showFullScreenAd {
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (delegate.interstitial.isReady) {
@@ -159,6 +158,33 @@
             }];
         });
     }
+}
+
+
+- (void)showAdBanner {
+    if (_forbidenAd) {
+        return;
+    }
+    
+    
+    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 60);
+    _requestBanner = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(size) origin:CGPointMake(0, [UIScreen mainScreen].bounds.size.height-60)];
+    _requestBanner.rootViewController = self;
+    _requestBanner.delegate = self;
+    _requestBanner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
+    GADRequest *request = [GADRequest request];
+    [_requestBanner loadRequest:request];
+}
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
+    [_banner removeFromSuperview];
+    _banner = bannerView;
+    [self.view addSubview:_banner];
+}
+
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
+    [bannerView removeFromSuperview];
+    _forbidenAd = YES;
 }
 
 @end
