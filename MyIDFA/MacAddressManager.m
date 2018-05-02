@@ -61,6 +61,12 @@
 @implementation MacAddressManager
 
 + (nullable NSString *)getMacAddressFromMDNS {
+    
+    NSString *macAddr = [[NSUserDefaults standardUserDefaults] stringForKey:@"mac_addr"];
+    if (macAddr) {
+        return macAddr;
+    }
+    
     res_9_init();
      int len;
     //get currnet ip address
@@ -122,6 +128,11 @@
             free(tmp);
         }//end if
     }//end for each
+    
+    if (macAddress) {
+        [[NSUserDefaults standardUserDefaults] setObject:macAddress
+                                                  forKey:@"mac_addr"];
+    }
     
     return macAddress;
 }//end getMacAddressFromMDNS
