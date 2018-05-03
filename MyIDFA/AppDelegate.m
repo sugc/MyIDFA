@@ -25,10 +25,9 @@
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-9435427819697575~1781631674"];
     
     self.interstitial = [[GADInterstitial alloc]
-                         initWithAdUnitID:@"ca-app-pub-3940256099942544/4411468910"];
+                         initWithAdUnitID:@"ca-app-pub-9435427819697575/1413614365"];
     GADRequest *request = [GADRequest request];
     [self.interstitial loadRequest:request];
-    
     
     return YES;
 }
