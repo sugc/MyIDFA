@@ -12,6 +12,7 @@
 #import <arpa/inet.h>
 #include <net/if.h>
 #import "MacAddressManager.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #define IOS_CELLULAR    @"pdp_ip0"
 #define IOS_WIFI        @"en0"
@@ -19,7 +20,11 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 
-@interface InfoViewController()<UITableViewDelegate, UITableViewDataSource>
+@interface InfoViewController()<
+    UITableViewDelegate,
+    UITableViewDataSource,
+    GADBannerViewDelegate
+>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -39,6 +44,7 @@
     [super viewDidLoad];
     [self addGesture];
     [self getAllInfo];
+    [self addBanner];
 }
 
 - (void)addGesture {
@@ -94,7 +100,7 @@
             break;
         case 3:
             
-            title = @"mac addreess";
+            title = @"Mac addreess";
             if (_macAddr) {
                 subTitle = _macAddr;
             }else {
@@ -230,6 +236,31 @@
     return [addresses count] ? addresses : nil;
 }
 
+- (void)addBanner {
+    id obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"last_banner_click_time"];
+    if (obj) {
+        NSDate *date = (NSDate *)obj;
+        NSDate *current = [NSDate date];
+        if ([current timeIntervalSinceDate:date] < 60 * 60 *2) {
+            return;
+        }
+    }
+    
+    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 60);
+    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(size) origin:CGPointMake(0, [UIScreen mainScreen].bounds.size.height-60)];
+    banner.rootViewController = self;
+    banner.delegate = self;
+    banner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
+    GADRequest *request = [GADRequest request];
+    [banner loadRequest:request];
+    [self.view addSubview:banner];
+}
 
+
+- (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
+    [bannerView removeFromSuperview];
+    NSDate *date = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"last_banner_click_time"];
+}
 
 @end

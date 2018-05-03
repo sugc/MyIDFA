@@ -19,7 +19,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
     [Fabric with:@[[Crashlytics class]]];
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-9435427819697575~1781631674"];

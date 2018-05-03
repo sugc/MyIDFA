@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) GADBannerView *requestBanner;
 
+@property (nonatomic, strong) UILabel *countDownLabel;
+
 @end
 
 @implementation ViewController
@@ -54,7 +56,7 @@
         UIView *foreView = [[UIView alloc] initWithFrame:self.view.bounds];
         foreView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:foreView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self showFullScreenAd];
             [foreView removeFromSuperview];
             //
@@ -152,12 +154,38 @@
         self.modalPresentationStyle = UIModalPresentationNone;
         [delegate.interstitial presentFromRootViewController:self];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[self presentedViewController] dismissViewControllerAnimated:NO completion:^{
-                
-            }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            _countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen  mainScreen].bounds.size.width - 70,
+                                                                        iPhoneXSafeDistanceTop + 10,
+                                                                        50,
+                                                                        20)];
+            _countDownLabel.layer.cornerRadius = 10;
+            _countDownLabel.layer.masksToBounds = YES;
+            _countDownLabel.textColor = [UIColor whiteColor];
+            
+            _countDownLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+            _countDownLabel.text = @"3";
+            _countDownLabel.textAlignment = NSTextAlignmentCenter;
+            [[UIApplication sharedApplication].keyWindow addSubview:_countDownLabel];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeat:) userInfo:nil repeats:YES];
         });
     }
+}
+
+- (void)repeat:(NSTimer *)timer {
+    
+    static NSInteger count = 2;
+    if (count == 0) {
+        [timer invalidate];
+        [_countDownLabel removeFromSuperview];
+        [[self presentedViewController] dismissViewControllerAnimated:NO completion:^{
+            
+        }];
+    }else {
+        NSString *text = [NSString stringWithFormat:@"%ld",count];
+        _countDownLabel.text = text;
+    }
+    count --;
 }
 
 
