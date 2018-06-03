@@ -189,8 +189,6 @@
 				8AA001CD202B1CC8002BE56E /* Sources */,
 				8AA001CE202B1CC8002BE56E /* Frameworks */,
 				8AA001CF202B1CC8002BE56E /* Resources */,
-				E283D3C2103B4515EA996ABA /* [CP] Embed Pods Frameworks */,
-				178835474FA44004CD01E348 /* [CP] Copy Pods Resources */,
 				8A8A347F202B2BDB00A5C0EA /* ShellScript */,
 			);
 			buildRules = (
@@ -312,21 +310,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		178835474FA44004CD01E348 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyIDFA/Pods-MyIDFA-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63DD987344B1F98C1616A8C3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,21 +340,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 0bd35f2f57e37f02d123c669e6cf00e9d3a6bdee f3f9fd90664babaf62c4265e11a44df3eb356cff4517c922f65eb2345d2a9605";
-		};
-		E283D3C2103B4515EA996ABA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyIDFA/Pods-MyIDFA-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
