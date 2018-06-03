@@ -36,15 +36,22 @@
 
 @property (nonatomic, copy) NSString *macAddr;
 
+@property (nonatomic, strong) GADBannerView *banner;
+
 @end
 
 @implementation InfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configUI];
     [self addGesture];
     [self getAllInfo];
     [self addBanner];
+}
+
+- (void)configUI {
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)addGesture {
@@ -157,7 +164,7 @@
     animation.type = @"cube";
     animation.subtype = subType;
     [self.view.window.layer addAnimation:animation forKey:nil];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 //获取所有信息
@@ -247,13 +254,14 @@
     }
     
     CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 60);
-    GADBannerView *banner = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(size) origin:CGPointMake(0, [UIScreen mainScreen].bounds.size.height-60)];
-    banner.rootViewController = self;
-    banner.delegate = self;
-    banner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
+    _banner = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(size) origin:CGPointMake(0, [UIScreen mainScreen].bounds.size.height-60)];
+    _banner.rootViewController = self;
+    _banner.delegate = self;
+    _banner.adUnitID = @"ca-app-pub-9435427819697575/4573602850";
     GADRequest *request = [GADRequest request];
-    [banner loadRequest:request];
-    [self.view addSubview:banner];
+    request.testDevices = @[@"E8CE0248-1963-4FF5-BC94-CDD0E9CA5040"];
+    [_banner loadRequest:request];
+    [self.view addSubview:_banner];
 }
 
 

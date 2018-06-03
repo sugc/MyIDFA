@@ -12,12 +12,6 @@
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "AppDelegate.h"
 
-#define IS_IPHONE_5_8 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )812 ) < DBL_EPSILON )
-
-#define iPhoneXSafeDistanceTop ((IS_IPHONE_5_8)?44:0)
-#define iPhoneXSafeDistanceBottom ((IS_IPHONE_5_8)?34:0)
-#define iPhoneXSafeDistance ((IS_IPHONE_5_8)?78:0)
-
 
 @interface ViewController ()<GADBannerViewDelegate,GADInterstitialDelegate>
 
@@ -33,9 +27,14 @@
 
 @property (nonatomic, strong) GADBannerView *requestBanner;
 
-@property (nonatomic, strong) UILabel *countDownLabel;
 
 @end
+
+#define IS_IPHONE_5_8 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )812 ) < DBL_EPSILON )
+
+#define iPhoneXSafeDistanceTop ((IS_IPHONE_5_8)?44:0)
+#define iPhoneXSafeDistanceBottom ((IS_IPHONE_5_8)?34:0)
+#define iPhoneXSafeDistance ((IS_IPHONE_5_8)?78:0)
 
 @implementation ViewController
 
@@ -50,18 +49,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        UIView *foreView = [[UIView alloc] initWithFrame:self.view.bounds];
-        foreView.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:foreView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self showFullScreenAd];
-            [foreView removeFromSuperview];
-            //
-        });
-    });
     
 }
 
@@ -139,7 +126,7 @@
     [self.view.window.layer addAnimation:animation forKey:nil];
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"InfoViewController" bundle:nil];
     InfoViewController *infoVC = (InfoViewController *)[story instantiateViewControllerWithIdentifier:@"InfoViewController"];
-    [self presentViewController:infoVC animated:NO completion:nil];
+    [self.navigationController pushViewController:infoVC animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,60 +134,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showFullScreenAd {
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (delegate.interstitial.isReady) {
-        [CATransaction setDisableActions:YES];
-        self.modalPresentationStyle = UIModalPresentationNone;
-        [delegate.interstitial presentFromRootViewController:self];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            _countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen  mainScreen].bounds.size.width - 70,
-                                                                        iPhoneXSafeDistanceTop + 10,
-                                                                        50,
-                                                                        20)];
-            _countDownLabel.layer.cornerRadius = 10;
-            _countDownLabel.layer.masksToBounds = YES;
-            _countDownLabel.textColor = [UIColor whiteColor];
-            
-            _countDownLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-            _countDownLabel.text = @"3";
-            _countDownLabel.textAlignment = NSTextAlignmentCenter;
-            [[UIApplication sharedApplication].keyWindow addSubview:_countDownLabel];
-            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeat:) userInfo:nil repeats:YES];
-        });
-    }
-}
-
-- (void)repeat:(NSTimer *)timer {
-    
-    static NSInteger count = 2;
-    if (count == 0) {
-        [timer invalidate];
-        [_countDownLabel removeFromSuperview];
-        [[self presentedViewController] dismissViewControllerAnimated:NO completion:^{
-            
-        }];
-    }else {
-        NSString *text = [NSString stringWithFormat:@"%ld",count];
-        _countDownLabel.text = text;
-    }
-    count --;
-}
 
 
 - (void)showAdBanner {
     if (_forbidenAd) {
         return;
     }
-    
-    
+    [_requestBanner removeFromSuperview];
+    _requestBanner = nil;
     CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 60);
     _requestBanner = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(size) origin:CGPointMake(0, [UIScreen mainScreen].bounds.size.height-60)];
     _requestBanner.rootViewController = self;
     _requestBanner.delegate = self;
     _requestBanner.adUnitID = @"ca-app-pub-9435427819697575/4379751147";
     GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"E8CE0248-1963-4FF5-BC94-CDD0E9CA5040"];
     [_requestBanner loadRequest:request];
 }
 

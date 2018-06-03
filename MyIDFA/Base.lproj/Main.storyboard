@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LGL-Q8-5HJ"/>
                         <viewControllerLayoutGuide type="bottom" id="hPd-Qb-Orw"/>
@@ -22,19 +22,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is your IDFA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYi-ob-cIh">
-                                <rect key="frame" x="15" y="40" width="340" height="70"/>
+                                <rect key="frame" x="15" y="50" width="340" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="CF4-8b-Oa5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNL-K4-zu4">
-                                <rect key="frame" x="0.0" y="110" width="375" height="193.5"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="183.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Kft-uS-Kgn">
-                                        <rect key="frame" x="5" y="67" width="365" height="60"/>
+                                        <rect key="frame" x="5" y="62" width="365" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="jfh-nr-bQF"/>
                                         </constraints>
@@ -75,13 +75,22 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-ze-Gdr">
-                                <rect key="frame" x="307" y="30" width="58" height="35"/>
+                                <rect key="frame" x="310" y="30" width="55" height="35"/>
+                                <color key="backgroundColor" red="0.30995008680555558" green="0.73887803819444442" blue="0.0" alpha="0.36614404965753422" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="HNk-dN-ThI"/>
                                     <constraint firstAttribute="height" constant="35" id="OGS-KE-neV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Network">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="actionMore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpa-Oe-GTa"/>
                                 </connections>
@@ -97,7 +106,7 @@
                             <constraint firstAttribute="trailing" secondItem="Qpn-ze-Gdr" secondAttribute="trailing" constant="10" id="Kak-qP-t8z"/>
                             <constraint firstItem="Qpn-ze-Gdr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="QCc-dc-Mmw"/>
                             <constraint firstItem="ja7-bh-cjG" firstAttribute="top" secondItem="LGL-Q8-5HJ" secondAttribute="bottom" constant="-7" id="U5X-MG-vbS"/>
-                            <constraint firstItem="QYi-ob-cIh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="40" id="VGp-Vl-ia0"/>
+                            <constraint firstItem="QYi-ob-cIh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="50" id="VGp-Vl-ia0"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="top" secondItem="qNL-K4-zu4" secondAttribute="bottom" id="apW-v6-EhQ"/>
                             <constraint firstItem="qNL-K4-zu4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fua-ah-GW7"/>
                             <constraint firstItem="QYi-ob-cIh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="jhx-0n-g9q"/>

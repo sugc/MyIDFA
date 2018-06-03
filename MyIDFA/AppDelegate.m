@@ -11,7 +11,21 @@
 #import <Crashlytics/Crashlytics.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
-@interface AppDelegate ()
+#define IS_IPHONE_5_8 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )812 ) < DBL_EPSILON )
+
+#define iPhoneXSafeDistanceTop ((IS_IPHONE_5_8)?44:0)
+#define iPhoneXSafeDistanceBottom ((IS_IPHONE_5_8)?34:0)
+#define iPhoneXSafeDistance ((IS_IPHONE_5_8)?78:0)
+
+static NSInteger count = 2;
+
+@interface AppDelegate ()<GADInterstitialDelegate>
+
+@property (nonatomic, strong) UILabel *countDownLabel;
+
+@property (nonatomic, strong) GADInterstitial *interstitial;
+
+@property (nonatomic, strong) UIViewController *topVC;
 
 @end
 
@@ -20,14 +34,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //
+    self.window = [[UIWindow alloc] init];
+    [self.window makeKeyAndVisible];
+    UINavigationController *nav = [[UINavigationController alloc] init];
+    self.window.rootViewController = nav;
+    nav.navigationBar.hidden = YES;
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *VC = [story instantiateViewControllerWithIdentifier:@"ViewController"];
+    [nav pushViewController:VC animated:NO];
+    nav.interactivePopGestureRecognizer.enabled = NO;
+    
     [Fabric with:@[[Crashlytics class]]];
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-9435427819697575~1781631674"];
-    
-    self.interstitial = [[GADInterstitial alloc]
-                         initWithAdUnitID:@"ca-app-pub-9435427819697575/1413614365"];
-    GADRequest *request = [GADRequest request];
-    [self.interstitial loadRequest:request];
-    
+    [self resetAd];
     return YES;
 }
 
@@ -46,6 +66,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [self enterForeGround];
 }
 
 
@@ -58,5 +79,75 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)enterForeGround {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self showFullScreenAd];
+    });
+}
+
+
+- (void)resetAd {
+    self.interstitial = nil;
+    self.interstitial = [[GADInterstitial alloc]
+                         initWithAdUnitID:@"ca-app-pub-9435427819697575/1413614365"];
+    self.interstitial.delegate = self;
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"E8CE0248-1963-4FF5-BC94-CDD0E9CA5040"];
+    [self.interstitial loadRequest:request];
+}
+
+- (void)showFullScreenAd {
+    if (self.interstitial.isReady) {
+        [CATransaction setDisableActions:YES];
+        self.topVC.modalPresentationStyle = UIModalPresentationNone;
+        [self.interstitial presentFromRootViewController:self.topVC];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            _countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIScreen  mainScreen].bounds.size.width - 70,
+                                                                        iPhoneXSafeDistanceTop + 10,
+                                                                        50,
+                                                                        20)];
+            _countDownLabel.layer.cornerRadius = 10;
+            _countDownLabel.layer.masksToBounds = YES;
+            _countDownLabel.textColor = [UIColor whiteColor];
+            
+            _countDownLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+            _countDownLabel.text = @"3";
+            _countDownLabel.textAlignment = NSTextAlignmentCenter;
+            [self.window addSubview:_countDownLabel];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeat:) userInfo:nil repeats:YES];
+        });
+    }
+}
+
+- (void)repeat:(NSTimer *)timer {
+    
+    if (count == 0) {
+        [timer invalidate];
+        [_countDownLabel removeFromSuperview];
+        [[self.topVC presentedViewController] dismissViewControllerAnimated:NO completion:^{
+            count = 2;
+            [self resetAd];
+        }];
+    }else {
+        NSString *text = [NSString stringWithFormat:@"%ld",count];
+        _countDownLabel.text = text;
+    }
+    count --;
+}
+
+
+-(UIViewController *)topVC {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UINavigationController *nav = (UINavigationController *)delegate.window.rootViewController;
+    _topVC = [nav topViewController];
+    return _topVC;
+}
+
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad {
+    [_countDownLabel removeFromSuperview];
+    count = 2;
+    [self resetAd];
+}
 
 @end
