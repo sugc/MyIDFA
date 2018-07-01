@@ -4,7 +4,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 target  'MyIDFA' do
 
 
-pod 'Firebase/Core' 
+pod 'PersonalizedAdConsent'
+pod 'Firebase/Core'
 pod 'Firebase/AdMob'
 pod 'Fabric'
 pod 'Crashlytics'

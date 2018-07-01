@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C4D53EC53AA8B02ED2349838646977F9"
-               BlueprintName = "Pods-MyIDFA"
+               BlueprintIdentifier = "90721B411D3D885821A96EB0FCF73328"
+               BlueprintName = "PersonalizedAdConsent"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-MyIDFA.a">
+               BuildableName = "libPersonalizedAdConsent.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

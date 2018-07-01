@@ -26,12 +26,14 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PersonalizedAdConsent (1.0.1)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase/AdMob
   - Firebase/Core
+  - PersonalizedAdConsent
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleToolboxForMac
     - nanopb
+    - PersonalizedAdConsent
 
 SPEC CHECKSUMS:
   Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
@@ -55,7 +58,8 @@ SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: ed8004a7265b424568dc84f3d2bbe3ea3fff958f
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PersonalizedAdConsent: d42d32065787eca61a9a334d2f786e6f81ebb4c7
 
-PODFILE CHECKSUM: 47f7c802e0657c76304cd9d85dc0450490a5db01
+PODFILE CHECKSUM: 14f1b1f0e94637d2a1ab00f2c822ec3c357fe90f
 
 COCOAPODS: 1.5.3
