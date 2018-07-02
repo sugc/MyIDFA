@@ -75,11 +75,11 @@
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-ze-Gdr">
-                                <rect key="frame" x="310" y="30" width="55" height="35"/>
-                                <color key="backgroundColor" red="0.30995008680555558" green="0.73887803819444442" blue="0.0" alpha="0.36614404965753422" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="300" y="30" width="60" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="HNk-dN-ThI"/>
-                                    <constraint firstAttribute="height" constant="35" id="OGS-KE-neV"/>
+                                    <constraint firstAttribute="width" constant="60" id="HNk-dN-ThI"/>
+                                    <constraint firstAttribute="height" constant="30" id="OGS-KE-neV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Network">
@@ -103,7 +103,7 @@
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-80" id="3UR-dC-AEu"/>
                             <constraint firstItem="9Fx-pP-2Ls" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B1C-QG-1BB"/>
                             <constraint firstAttribute="trailing" secondItem="QYi-ob-cIh" secondAttribute="trailing" constant="20" symbolic="YES" id="DUW-0u-usn"/>
-                            <constraint firstAttribute="trailing" secondItem="Qpn-ze-Gdr" secondAttribute="trailing" constant="10" id="Kak-qP-t8z"/>
+                            <constraint firstAttribute="trailing" secondItem="Qpn-ze-Gdr" secondAttribute="trailing" constant="15" id="Kak-qP-t8z"/>
                             <constraint firstItem="Qpn-ze-Gdr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="QCc-dc-Mmw"/>
                             <constraint firstItem="ja7-bh-cjG" firstAttribute="top" secondItem="LGL-Q8-5HJ" secondAttribute="bottom" constant="-7" id="U5X-MG-vbS"/>
                             <constraint firstItem="QYi-ob-cIh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="50" id="VGp-Vl-ia0"/>
@@ -119,6 +119,7 @@
                         <outlet property="btnMoreTop" destination="qbk-1c-e2z" id="D0G-a1-3hG"/>
                         <outlet property="idfaLabel" destination="Kft-uS-Kgn" id="rIZ-7d-CQu"/>
                         <outlet property="idfaLabelTop" destination="VGp-Vl-ia0" id="Apk-VW-R84"/>
+                        <outlet property="netWorkBtn" destination="Qpn-ze-Gdr" id="Tcm-I2-wdy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

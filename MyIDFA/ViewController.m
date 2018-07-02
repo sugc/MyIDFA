@@ -21,6 +21,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *idfaLabel;
 
+@property (nonatomic, weak) IBOutlet UIButton *netWorkBtn;
+
 @property (nonatomic, assign) BOOL forbidenAd;
 
 @property (nonatomic, strong) GADBannerView *banner;
@@ -41,6 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _idfaLabelTop.constant = 40 + iPhoneXSafeDistanceTop;
+    _netWorkBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _netWorkBtn.layer.borderWidth = 1.0;
     NSString *idfa = [self getIDFA];
     _idfaLabel.text = idfa;
     [self checkIsIDFAUseful:idfa];
@@ -150,12 +154,13 @@
     GADRequest *request = [GADRequest request];
     request.testDevices = @[@"E8CE0248-1963-4FF5-BC94-CDD0E9CA5040"];
     [_requestBanner loadRequest:request];
+    [self.view addSubview:_requestBanner];
 }
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
-    [_banner removeFromSuperview];
-    _banner = bannerView;
-    [self.view addSubview:_banner];
+//    [_banner removeFromSuperview];
+//    _banner = bannerView;
+//    [self.view addSubview:_banner];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {

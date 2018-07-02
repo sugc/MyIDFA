@@ -83,6 +83,10 @@ static NSInteger count = 2;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          [self showFullScreenAd];
     });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self resetAd];
+    });
 }
 
 
@@ -127,7 +131,6 @@ static NSInteger count = 2;
         [_countDownLabel removeFromSuperview];
         [[self.topVC presentedViewController] dismissViewControllerAnimated:NO completion:^{
             count = 2;
-            [self resetAd];
         }];
     }else {
         NSString *text = [NSString stringWithFormat:@"%ld",count];
