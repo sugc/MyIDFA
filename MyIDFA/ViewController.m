@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "InfoViewController.h"
+#import "RecordingViewController.h"
 #import <AdSupport/AdSupport.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
 #import "AppDelegate.h"
@@ -15,13 +16,14 @@
 
 @interface ViewController ()<GADBannerViewDelegate,GADInterstitialDelegate>
 
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *idfaLabelTop;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *btnMoreTop;
 
 @property (nonatomic, weak) IBOutlet UILabel *idfaLabel;
 
 @property (nonatomic, weak) IBOutlet UIButton *netWorkBtn;
+
+@property (nonatomic, weak) IBOutlet UIButton *recordingBtn;
 
 @property (nonatomic, assign) BOOL forbidenAd;
 
@@ -42,14 +44,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _idfaLabelTop.constant = 40 + iPhoneXSafeDistanceTop;
     _netWorkBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _netWorkBtn.layer.borderWidth = 1.0;
+    
+    if (@available(iOS 12.0, *)) {
+        _recordingBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        _recordingBtn.layer.borderWidth = 1.0;
+    }else {
+        _recordingBtn.hidden = YES;
+    }
+  
     NSString *idfa = [self getIDFA];
     _idfaLabel.text = idfa;
     [self checkIsIDFAUseful:idfa];
     [self addGesture];
     [self showAdBanner];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +77,7 @@
     lRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:rRecognizer];
     [self.view addGestureRecognizer:lRecognizer];
+    
 }
 
 
@@ -76,7 +87,16 @@
         return;
     }
     
-    [self goToInfoViewControllerWithDirection:recognizer.direction];
+    if (@available(iOS 12.0, *)) {
+        if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+            [self goToInfoViewControllerWithDirection:recognizer.direction];
+        }else if (recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+            [self goToRecordingViewControllerWithDirection:recognizer.direction];
+        }
+    }else {
+         [self goToInfoViewControllerWithDirection:recognizer.direction];
+    }
+//    [self goToInfoViewControllerWithDirection:recognizer.direction];
 }
 
 //
@@ -113,10 +133,14 @@
     [self goToInfoViewControllerWithDirection:UISwipeGestureRecognizerDirectionLeft];
 }
 
+- (IBAction)actionRecording:(id)sender {
+     [self goToRecordingViewControllerWithDirection:UISwipeGestureRecognizerDirectionRight];
+}
+
 - (void)goToInfoViewControllerWithDirection:(UISwipeGestureRecognizerDirection)direction {
     
-    if (direction != UISwipeGestureRecognizerDirectionRight &&
-        direction != UISwipeGestureRecognizerDirectionLeft) {
+    if (direction != UISwipeGestureRecognizerDirectionLeft &&
+        direction != UISwipeGestureRecognizerDirectionRight) {
         return;
     }
     
@@ -131,6 +155,22 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"InfoViewController" bundle:nil];
     InfoViewController *infoVC = (InfoViewController *)[story instantiateViewControllerWithIdentifier:@"InfoViewController"];
     [self.navigationController pushViewController:infoVC animated:NO];
+}
+
+- (void)goToRecordingViewControllerWithDirection:(UISwipeGestureRecognizerDirection)direction {
+    if (direction != UISwipeGestureRecognizerDirectionRight) {
+        return;
+    }
+    NSString *subType = direction == UISwipeGestureRecognizerDirectionRight ? kCATransitionFromLeft : kCATransitionFromRight;
+    
+    CATransition *animation = [CATransition animation];
+    animation.duration = 0.6;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = @"cube";
+    animation.subtype = subType;
+    [self.view.window.layer addAnimation:animation forKey:nil];
+    RecordingViewController *recVC = [[RecordingViewController alloc] init];
+    [self.navigationController pushViewController:recVC animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,9 +198,9 @@
 }
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
-//    [_banner removeFromSuperview];
-//    _banner = bannerView;
-//    [self.view addSubview:_banner];
+    [_banner removeFromSuperview];
+    _banner = bannerView;
+    [self.view addSubview:_banner];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)bannerView {
